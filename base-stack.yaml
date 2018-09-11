@@ -27,10 +27,6 @@ Resources:
         Statement:
           - Effect: Allow
             Action:
-              - codecommit:BatchGetRepositories
-              - codecommit:Get*
-              - codecommit:GitPull
-              - codecommit:List*
               - autoscaling:*
               - codedeploy:*
               - ec2:*

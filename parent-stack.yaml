@@ -1,9 +1,13 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Parent Stack
 Parameters:
-  Repository: #link to repository where application is stored
+  Repository: #link to repository where application is being stored
     Type: String
     Default: "http://github.com/sjoerdsantema/loremipsum"
+  TemplateBucket:
+    Type: String
+    Default: "https://s3.us-east-2.amazonaws.com/big-donkey/"
+    Description: Location of S3 bucket containing the child stacks e.g. https://s3.us-east-2.amazonaws.com/big-donkey/
   KeyName:
     Type: AWS::EC2::KeyPair::KeyName
     Default: trainingdays
@@ -22,19 +26,24 @@ Resources:
  SkeletonStack:
   Type: AWS::CloudFormation::Stack
   Properties:
-    TemplateURL: https://s3.us-east-2.amazonaws.com/old-horse/skeleton.yaml
+    TemplateURL: !Join ["", [!Ref TemplateBucket,'skeleton.yaml'] ] 
     TimeoutInMinutes: 60
  BaseStack:
   Type: AWS::CloudFormation::Stack
   Properties:
-    TemplateURL: https://s3.us-east-2.amazonaws.com/old-horse/base-stack.yaml
+    TemplateURL: !Join ["", [!Ref TemplateBucket,'base-stack.yaml'] ]
     Parameters:
       AsgGroup: !GetAtt 'AppStack.Outputs.AsgGroup'
+    TimeoutInMinutes: 60
+ LambdaStack:
+  Type: AWS::CloudFormation::Stack
+  Properties:
+    TemplateURL: !Join ["", [!Ref TemplateBucket,'lambda-stack.yaml'] ]
     TimeoutInMinutes: 60
  AppStack:
   Type: AWS::CloudFormation::Stack
   Properties:
-    TemplateURL: https://s3.us-east-2.amazonaws.com/old-horse/app.yaml
+    TemplateURL: !Join ["", [!Ref TemplateBucket,'app.yaml'] ]
     Parameters:
       Repository: !Ref Repository
       BastionSubnet:
