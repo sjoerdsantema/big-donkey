@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Lambda Stack
+Description: Lambda stack detects changes in source s3 bucket and performs cfn update
 Resources:
   LambdaServiceRole: #lambda service role
     Type: AWS::IAM::Role
@@ -32,33 +32,6 @@ Resources:
             Resource: "*"
       Roles:
         - !Ref LambdaServiceRole
-  LambdaFunction:
-    Type: 'AWS::Lambda::Function'
-    Properties:
-      Handler: index.handler
-      MemorySize: 128
-      Timeout: 15
-      Role: !GetAtt LambdaServiceRole.Arn
-      Runtime: nodejs6.10
-      Code:
-        ZipFile: |
-              import boto3
-              s3 = boto3.resource('s3')
-              
-              def lambda_handler(event, context):
-              
-                  bucket = s3.Bucket('big-donkey')
-                  counter = 0
-              
-                  for object in bucket.objects.all():
-                     counter = counter + 1
-                
-                  print("There are {} number of files in the bucket".format(
-                      counter))
-                      
-                  return {
-                      "statusCode": 200,
-                      "body": "there are " + str(counter) + " files in this bucket"
-                   }   
-          
 
+
+ 
