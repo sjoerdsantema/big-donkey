@@ -39,9 +39,9 @@ elif [ "$wish" == "git" ] ; then
         echo "We shall bring light to all git repositories. What do you want to say in your commit?" 
         read commit 
         git add .
-        git commit -m '$commit' 
+        git commit -m "$commit"
         git push origin master
-        echo "Done."
+        echo "Done. Commit message is " $commit 
         sleep 10
         clear
         ./helper.sh  
