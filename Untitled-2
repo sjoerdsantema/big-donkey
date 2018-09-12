@@ -1,0 +1,3 @@
+stack = 'Big-Donkey'
+s3-bucket = s3://big-donkey
+parent-template = 'https://s3.us-east-2.amazonaws.com/big-donkey/parent-stack.yaml'
