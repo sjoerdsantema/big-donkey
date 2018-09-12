@@ -5,5 +5,5 @@
 ███████╗███████╗██║  ██║██████╔╝       ██║   ██║  ██║███████╗    ╚███╔███╔╝██║  ██║   ██║   
 ╚══════╝╚══════╝╚═╝  ╚═╝╚═════╝        ╚═╝   ╚═╝  ╚═╝╚══════╝     ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   
                                                                                             
-Cloudformation Stack Tool / by: Sjoerd Santema / configuration: helper.conf 
+Cloudformation CLI Tool / by: Sjoerd Santema / configuration: helper.conf 
 --------------------------------------------------------------------------------------------

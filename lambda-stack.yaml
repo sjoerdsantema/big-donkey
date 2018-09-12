@@ -1,0 +1,62 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Lambda Stack
+Resources:
+  LambdaServiceRole: #lambda service role
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                 - lambda.amazonaws.com
+            Action:
+                 - sts:AssumeRole
+      Path: "/"
+  LambdaPolicy: #create lambda policy
+    Type: AWS::IAM::Policy
+    DependsOn: LambdaServiceRole
+    Properties:
+      PolicyName: LambdaPolicy
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Action:
+              - autoscaling:*
+              - codedeploy:*
+              - ec2:*
+              - cloudwatch:*
+              - elasticloadbalancing:*
+              - s3:*
+            Resource: "*"
+      Roles:
+        - !Ref LambdaServiceRole
+  LambdaFunction:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      Handler: index.handler
+      MemorySize: 128
+      Timeout: 15
+      Role: !GetAtt LambdaServiceRole.Arn
+      Runtime: nodejs6.10
+      Code:
+        ZipFile: |
+              import boto3
+              s3 = boto3.resource('s3')
+              
+              def lambda_handler(event, context):
+              
+                  bucket = s3.Bucket('big-donkey')
+                  counter = 0
+              
+                  for object in bucket.objects.all():
+                     counter = counter + 1
+                
+                  print("There are {} number of files in the bucket".format(
+                      counter))
+                      
+                  return {
+                      "statusCode": 200,
+                      "body": "there are " + str(counter) + " files in this bucket"
+                   }   

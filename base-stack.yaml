@@ -27,6 +27,10 @@ Resources:
         Statement:
           - Effect: Allow
             Action:
+              - codecommit:BatchGetRepositories
+              - codecommit:Get*
+              - codecommit:GitPull
+              - codecommit:List*
               - autoscaling:*
               - codedeploy:*
               - ec2:*
@@ -67,7 +71,7 @@ Resources:
       DeploymentOption: WITHOUT_TRAFFIC_CONTROL
       DeploymentType: IN_PLACE
     ServiceRoleArn: !GetAtt CDServiceRole.Arn
-  CPServiceRole: #codepipeline service role
+  CPServiceRole: #CodePipeline service role
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -97,7 +101,6 @@ Resources:
               - s3:PutObject
             Resource:
               - arn:aws:s3:::codepipeline*
-              - arn:aws:s3:::elasticbeanstalk*
             Effect: Allow
           - Action:
               - codecommit:CancelUploadArchive
@@ -116,7 +119,6 @@ Resources:
             Resource: "*"
             Effect: Allow
           - Action:
-              - elasticbeanstalk:*
               - ec2:*
               - elasticloadbalancing:*
               - autoscaling:*
@@ -225,4 +227,3 @@ Resources:
       Subscription:
         - Endpoint: "sjoerdsantema@gmail.com"
           Protocol: 'email'
-

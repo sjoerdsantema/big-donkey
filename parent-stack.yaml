@@ -28,6 +28,11 @@ Resources:
   Properties:
     TemplateURL: !Join ["", [!Ref TemplateBucket,'skeleton.yaml'] ] 
     TimeoutInMinutes: 60
+ LambdaStack:
+  Type: AWS::CloudFormation::Stack
+  Properties:
+    TemplateURL: !Join ["", [!Ref TemplateBucket,'lambda-stack.yaml'] ] 
+    TimeoutInMinutes: 60
  BaseStack:
   Type: AWS::CloudFormation::Stack
   Properties:

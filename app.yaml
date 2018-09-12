@@ -26,7 +26,7 @@ Parameters:
     Description: Public 2nd Autoscaling Subnet
     Type: String
   AutoScaling2Subnet:
-    Description: AutoScaling 2 Subnet
+    Description: AutoScaling 2 Subnet 
     Type: String
   KeyName:
     Description: Keyname to use
