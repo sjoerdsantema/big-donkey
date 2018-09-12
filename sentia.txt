@@ -5,5 +5,5 @@
 ███████╗███████╗██║  ██║██████╔╝       ██║   ██║  ██║███████╗    ╚███╔███╔╝██║  ██║   ██║   
 ╚══════╝╚══════╝╚═╝  ╚═╝╚═════╝        ╚═╝   ╚═╝  ╚═╝╚══════╝     ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   
                                                                                             
-Cloudformation Stack Destroyer / by: Sjoerd Santema / config: helper.conf 
+Cloudformation Stack Tool / by: Sjoerd Santema / configuration: helper.conf 
 --------------------------------------------------------------------------------------------
