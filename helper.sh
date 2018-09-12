@@ -4,9 +4,9 @@ clear
 echo " "
 cat sentia.txt
 echo " "
-echo "Today we're working on:" $stack
-echo "The bucket we're getting our templates from and to is:" $bucket
-echo "We're loading this template when updating:" $template  
+echo "Today we're working on:" "$stack"
+echo "The bucket we're getting our templates from and to is:" "$bucket"
+echo "We're loading this template when updating:" "$template"  
 echo "--------------------------------------------------------------------------------------------"
 echo " "
 echo "What would you like to do? Choices are: sync, delete, create, git or quit:" 
@@ -14,14 +14,14 @@ read wish
 
 if [ "$wish" == "create" ] ; then
         echo "As you wish, we shall create this new stack."
-        aws cloudformation create-stack --stack-name $stack --template-url $template --capabilities CAPABILITY_IAM 
+        aws cloudformation create-stack --stack-name "$stack" --template-url "$template" --capabilities CAPABILITY_IAM 
         sleep 5
         clear
         ./helper.sh 
         exit 1
 elif [ "$wish" == "sync" ] ; then
         echo " "
-        aws s3 sync . $bucket --exclude '*' --include '*.yaml' 
+        aws s3 sync . "$bucket" --exclude '*' --include '*.yaml' 
         aws cloudformation update-stack --stack-name $stack --template-url $template 
         echo "We shall bring the news to every corner and s3 bucket."
         sleep 5

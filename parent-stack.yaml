@@ -35,11 +35,6 @@ Resources:
     Parameters:
       AsgGroup: !GetAtt 'AppStack.Outputs.AsgGroup'
     TimeoutInMinutes: 60
- LambdaStack:
-  Type: AWS::CloudFormation::Stack
-  Properties:
-    TemplateURL: !Join ["", [!Ref TemplateBucket,'lambda-stack.yaml'] ]
-    TimeoutInMinutes: 60
  AppStack:
   Type: AWS::CloudFormation::Stack
   Properties:
